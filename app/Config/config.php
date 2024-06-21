@@ -4,7 +4,7 @@
 // here we set the url of our app example : 
 //define("BURL","http://localhost:port/sys_vote(the app name)/public/");
 
-define("BURL","http://localhost/app_api/public/");
+define("BURL","http://localhost/api/public/");
 
 
 /**
