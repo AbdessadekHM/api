@@ -1,5 +1,5 @@
-CREATE DATABASE CLIENTS;
-USE CLIENTS;
+CREATE DATABASE app;
+USE app;
 CREATE TABLE admin(
 id_admin INT NOT NULL UNIQUE, 
 email VARCHAR(20),
@@ -8,7 +8,7 @@ password varchar(20) NOT NULL,
 PRIMARY KEY(id_admin)
 );
 
-CREATE TABLE PRODUITS(
+CREATE TABLE products(
 code_prod INT NOT NULL UNIQUE,
 nom_prod varchar(30),
 type_prod varchar(20),
@@ -17,12 +17,12 @@ description_prod varchar(255),
 ingredients_prod varchar(100),
 PRIMARY KEY(code_prod)
 );
-CREATE TABLE INGREDIENTS(
+CREATE TABLE ingredients(
 id_ingredient INT NOT NULL UNIQUE,
 nom_ingredient varchar(15),
 PRIMARY KEY(id_ingredient)
 );
-CREATE TABLE ENTREPRISES_PHARMACEUTIQUE(
+CREATE TABLE companies(
 id_entr_pharm INT NOT NULL UNIQUE,
 name VARCHAR(20),
 username varchar(20),
@@ -30,9 +30,9 @@ password varchar(20) NOT NULL,
 coordonnees_entre_pharm VARCHAR(30),
 id_admin INT NOT NULL,
 PRIMARY KEY(id_entr_pharm),
-FOREIGN KEY (id_admin) REFERENCES ADMINISTRATEURS(id_admin)
+FOREIGN KEY (id_admin) REFERENCES admin(id_admin)
 );
-CREATE TABLE PARTENAIRES(
+CREATE TABLE partners(
 id_partenaire INT NOT NULL UNIQUE,
 nom_part VARCHAR(30),
 username varchar(20),
@@ -41,9 +41,9 @@ coordonneees VARCHAR(20),
 domaine VARCHAR(20),
 id_admin INT NOT NULL,
 PRIMARY KEY(id_partenaire),
-FOREIGN KEY (id_admin) REFERENCES ADMINISTRATEURS(id_admin)
+FOREIGN KEY (id_admin) REFERENCES admin(id_admin)
 );
-CREATE TABLE FEMMES_ENCEINTE(
+CREATE TABLE women(
 id_fe_en INT NOT NULL UNIQUE,
 nom_complet VARCHAR(30),
 username varchar(20),
@@ -65,9 +65,9 @@ nom_medic VARCHAR(30),
 description_medic VARCHAR(255),
 id_entr_pharm INT NOT NULL,
 PRIMARY KEY(id_medic),
-FOREIGN KEY (id_entr_pharm) REFERENCES ENTREPRISES_PHARMACEUTIQUE(id_entr_pharm)
+FOREIGN KEY (id_entr_pharm) REFERENCES companies(id_entr_pharm)
 );
-CREATE TABLE PROFESSIONNELS_DE_SANTE(
+CREATE TABLE professionals(
 id_pr_sante INT NOT NULL UNIQUE,
 nom_pr_sante VARCHAR(30),
 username varchar(20),
@@ -77,8 +77,8 @@ specialite BOOLEAN,
 id_admin INT NOT NULL,
 id_fe_en INT NOT NULL,
 PRIMARY KEY(id_pr_sante),
-FOREIGN KEY (id_admin) REFERENCES ADMINISTRATEURS(id_admin),
-FOREIGN KEY (id_fe_en) REFERENCES FEMMES_ENCEINTE(id_fe_en)
+FOREIGN KEY (id_admin) REFERENCES admin(id_admin),
+FOREIGN KEY (id_fe_en) REFERENCES women(id_fe_en)
 );
 CREATE TABLE PUBLICATIONS(
 id_pub INT NOT NULL UNIQUE,
@@ -86,20 +86,20 @@ titre_pub VARCHAR(15),
 text_pub VARCHAR(600),
 id_fe_en INT,
 PRIMARY KEY(id_pub),
-FOREIGN KEY (id_fe_en) REFERENCES FEMMES_ENCEINTE(id_fe_en)
+FOREIGN KEY (id_fe_en) REFERENCES women(id_fe_en)
 );
 CREATE TABLE COMMENTAIRES(
 id_comment INT UNIQUE,
 text_comment VARCHAR(100),
 id_fe_en INT,
 PRIMARY KEY(id_comment),
-FOREIGN KEY (id_fe_en) REFERENCES FEMMES_ENCEINTE(id_fe_en)
+FOREIGN KEY (id_fe_en) REFERENCES women(id_fe_en)
 );
 CREATE TABLE SCANNER(
 id_fe_en INT,
 code_prod INT,
-FOREIGN KEY (id_fe_en) REFERENCES FEMMES_ENCEINTE(id_fe_en),
-FOREIGN KEY (code_prod) REFERENCES PRODUITS(code_prod)
+FOREIGN KEY (id_fe_en) REFERENCES women(id_fe_en),
+FOREIGN KEY (code_prod) REFERENCES products(code_prod)
 );
 CREATE TABLE REPAS(
 id_repas INT NOT NULL UNIQUE,
@@ -107,19 +107,19 @@ nom_repas VARCHAR(15),
 description VARCHAR(500),
 id_fe_en INT NOT NULL,
 PRIMARY KEY(id_repas),
-FOREIGN KEY (id_fe_en) REFERENCES FEMMES_ENCEINTE(id_fe_en)
+FOREIGN KEY (id_fe_en) REFERENCES women(id_fe_en)
 );
 CREATE TABLE CONTENIR(
 id_repas INT NOT NULL,
 id_ingredient INT,
 FOREIGN KEY (id_repas) REFERENCES REPAS(id_repas),
-FOREIGN KEY (id_ingredient) REFERENCES INGREDIENTS(id_ingredient)
+FOREIGN KEY (id_ingredient) REFERENCES ingredients(id_ingredient)
 );
 CREATE TABLE PROPOSER(
 id_medic INT,
 id_pr_sante INT,
 FOREIGN KEY (id_medic) REFERENCES MEDICAMENTS(id_medic),
-FOREIGN KEY (id_pr_sante) REFERENCES PROFESSIONNELS_DE_SANTE(id_pr_sante)
+FOREIGN KEY (id_pr_sante) REFERENCES professionals(id_pr_sante)
 );
 CREATE TABLE RAPPORT_DE_SANTE(
 id_rapp INT NOT NULL UNIQUE,
@@ -128,6 +128,6 @@ description_rapp VARCHAR(600),
 id_pr_sante INT NOT NULL,
 id_fe_en INT NOT NULL,
 PRIMARY KEY(id_rapp),
-FOREIGN KEY (id_pr_sante) REFERENCES PROFESSIONNELS_DE_SANTE(id_pr_sante),
-FOREIGN KEY (id_fe_en) REFERENCES FEMMES_ENCEINTE(id_fe_en)
+FOREIGN KEY (id_pr_sante) REFERENCES professionals(id_pr_sante),
+FOREIGN KEY (id_fe_en) REFERENCES women(id_fe_en)
 );

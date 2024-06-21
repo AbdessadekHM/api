@@ -8,7 +8,7 @@ $connectionInfos= [
 class DB{
     private $conn;
     function __construct($connectionInfos){
-        extract($info);
+        extract($connectionInfos);
         try {
             $this->conn = new PDO("mysql:host=$servername;dbname=$DB_name",$username,$password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

@@ -60,7 +60,7 @@ class App
     {
         
         // chaeck if controller is exist
-        echo $this->controller . "</br>";
+        //echo $this->controller . "</br>";
         if(class_exists($this->controller))
         {
             $controller = new $this->controller;

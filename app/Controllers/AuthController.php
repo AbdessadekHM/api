@@ -2,7 +2,7 @@
 
 class AuthController{
     private $user;
-    private $api;
+    protected $api;
     private $table;
     function __construct($table){
         $this->table = $table;
