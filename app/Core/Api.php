@@ -9,7 +9,7 @@ class Api {
      */
     function __construct($message = null,$code = null){
         if($message != null && $code != 200){
-            $this->sendJsonResponse($message,$code)
+            $this->sendJsonResponse($message,$code);
         }
     }
     /**
