@@ -7,7 +7,7 @@ class Api {
      * @param mixed $message Message to send in response
      * @param int $code HTTP status code
      */
-    function __construct($message,$code){
+    function __construct($message = null,$code = null){
         if($message != null && $code != 200){
             $this->sendJsonResponse($message,$code)
         }
