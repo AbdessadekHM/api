@@ -1,13 +1,13 @@
 <?php
-$info = [
-    'servername' => 'localhost:3000',
-    'username' => 'root',
-    'password' => '',
-    'DB_name' => 'system_voting'
+$connectionInfos= [
+    'servername' => DB_HOST,
+    'username' => DB_USER,
+    'password' => DB_PASS,
+    'DB_name' => DB_NAME
 ];
 class DB{
     private $conn;
-    function __construct($info){
+    function __construct($connectionInfos){
         extract($info);
         try {
             $this->conn = new PDO("mysql:host=$servername;dbname=$DB_name",$username,$password);
