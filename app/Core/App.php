@@ -32,7 +32,7 @@ class App
         $url = trim($url,"/");
         if(!empty($url))
         {
-            $url = str_replace("app_api/public","",$url);
+            $url = str_replace("api/public","",$url);
             $url = explode('/',$url);
             unset($url[0]);
             $url = array_values($url);
@@ -60,6 +60,7 @@ class App
     {
         
         // chaeck if controller is exist
+        echo $this->controller . "</br>";
         if(class_exists($this->controller))
         {
             $controller = new $this->controller;

@@ -10,7 +10,7 @@ class AdminController extends AuthController {
     public function dashboard(){
         if($_SERVER["REQUEST_METHOD"] == "GET"){
             $result = $this->women->getAllUsers();
-            $this->api->sendJsonResponse({"message":$result});
+            $this->api->sendJsonResponse(["message"=>"hello"]);
 
         }
     }
@@ -26,6 +26,5 @@ class AdminController extends AuthController {
             $this->woman->deleteUser("username = '$username' ");
         }
     }
-    
     
 }
