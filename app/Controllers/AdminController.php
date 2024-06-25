@@ -26,5 +26,11 @@ class AdminController extends AuthController {
             $this->woman->deleteUser("username = '$username' ");
         }
     }
+    public function columns(){
+        if($_SERVER["REQUEST_METHOD"] == "GET"){
+            $columns = $this->women->getUserAttributes();
+            $this->api->sendJsonResponse(["message" => $columns]);
+        }
+    }
     
 }

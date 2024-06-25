@@ -3,7 +3,7 @@
 class WomenController extends AuthController {
     private $product;
     function __construct(){
-        parent::__construct("womens");
+        parent::__construct("women");
         $this->product = new Product();
     }
     function scan(){
@@ -13,10 +13,10 @@ class WomenController extends AuthController {
            $result = $this->user->getFilteredUsers("username='$username'");
            if(!$result){
             $this->product->addItem($input);
-            $this->api->sendJsonResponse({"message" : "Product Added Successfully"},200)
+            $this->api->sendJsonResponse(["message" => "Product Added Successfully"],200);
            }
            else{
-            $this->api->sendJsonResponse({"message" : "Product Already exist"},200)
+            $this->api->sendJsonResponse(["message" => "Product Already exist"],200);
            }
             
         }

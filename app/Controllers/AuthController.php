@@ -11,12 +11,10 @@ class AuthController{
     }
     public function login(){
 
-        header('Content-Type: application/json');
-        echo json_encode(["message" => "hello i am working"]);
-        exit;
+        
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
-           $input = $this->api->recieveJsonInput();
+           $input = $this->api->receiveJsonInput();
            extract($input);
            $result = $this->user->getFilteredUsers("username= '$username'");
            if($result[0]->password == $password && $result[0]->username==$username){

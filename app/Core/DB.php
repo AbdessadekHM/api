@@ -56,4 +56,14 @@ class DB{
         
         
     }
+    function getColumns($table){
+        $sql = "SHOW COLUMNS FROM $table";
+        $stmt = $this->conn->query($sql);
+    
+        $columns = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $columns[] = $row['Field'];
+        }
+        return $columns;
+    }
 }

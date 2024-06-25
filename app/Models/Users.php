@@ -26,4 +26,8 @@ class Users{
     public function deleteUser($condition){
         $this->db->Delete($this->table,$condition);
     }
+    public function getUserAttributes(){
+        $columns = $this->db->getColumns($this->table);
+        return $columns;
+    }
 }
